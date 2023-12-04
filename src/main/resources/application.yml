@@ -1,0 +1,27 @@
+
+spring:
+  datasource:
+    url: jdbc:mariadb://220.85.169.165/dividend
+    username: chan4760
+    password: Tjtocks178@
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8080
+
+logging:
+  config: classpath:logback-spring.xml
