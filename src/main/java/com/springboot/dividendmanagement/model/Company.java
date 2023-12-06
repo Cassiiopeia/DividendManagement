@@ -1,9 +1,13 @@
 package com.springboot.dividendmanagement.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import org.springframework.web.bind.annotation.RestController;
 
-@Data
+@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Company {
     private String ticker;
