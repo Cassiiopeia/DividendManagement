@@ -11,9 +11,41 @@ POST http://localhost:8080/company
 Content-Type: application/json
 
 {
-  "ticker": "O"
+  "ticker": "AAPL"
+}
+
+### post company-Invesco QQQ Trust
+POST http://localhost:8080/company
+Content-Type: application/json
+
+{
+  "ticker": "QQQ"
+}
+
+### post company-Nike
+POST http://localhost:8080/company
+Content-Type: application/json
+
+{
+  "ticker": "NKE"
+}
+
+### post company-Spor S&P 500 ETF Trust
+POST http://localhost:8080/company
+Content-Type: application/json
+
+{
+  "ticker": "SPY"
 }
 
 ### get dividend from company
 GET http://localhost:8080/finance/dividend/3M Company
+Accept: application/json
+
+### get trie autocomplete
+GET http://localhost:8080/company/autocomplete?keyword
+Accept: application/json
+
+### get trie autocomplete
+GET http://localhost:8080/company/autocomplete?keyword=I
 Accept: application/json

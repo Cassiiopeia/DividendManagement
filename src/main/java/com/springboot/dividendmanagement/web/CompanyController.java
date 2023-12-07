@@ -20,7 +20,8 @@ public class CompanyController {
     //  배당금 조회 자성완성
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
-        return null;
+        var result = companyService.autocomplete(keyword);
+        return ResponseEntity.ok(result);
     }
 
     // 회사 검색 (전체 회사목록 출력)
@@ -38,6 +39,7 @@ public class CompanyController {
             throw new RuntimeException("ticker is empty");
         }
         Company company = companyService.save(ticker);
+        companyService.addAutoCompletekeyword(company.getName());
         return ResponseEntity.ok(company);
     }
 
