@@ -2,6 +2,7 @@ package com.springboot.dividendmanagement.scheduler;
 
 import com.springboot.dividendmanagement.model.Company;
 import com.springboot.dividendmanagement.model.ScrapedResult;
+import com.springboot.dividendmanagement.model.constants.CacheKey;
 import com.springboot.dividendmanagement.persist.CompanyRepository;
 import com.springboot.dividendmanagement.persist.DividendRepository;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
@@ -9,6 +10,7 @@ import com.springboot.dividendmanagement.persist.entity.DividendEntity;
 import com.springboot.dividendmanagement.scraper.YahooFinanceScraper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ public class ScraperScheduler {
     private final YahooFinanceScraper yahooFinanceScraper;
     private final DividendRepository dividendRepository;
 
+    // 일정 주기마다 수행
+    @CacheEvict(value = CacheKey.KEY_FINANCE, allEntries = true)
     @Scheduled(cron = "${scheduler.scrap.yahoo}")
     public void yahooFinanceScheduling() {
         log.info("scraping schedular is started");
@@ -33,9 +37,9 @@ public class ScraperScheduler {
             log.info("scraping schedular is started -> " + company.getName());
             ScrapedResult scrapedResult = yahooFinanceScraper.scrap(
                     Company.builder()
-                    .name(company.getName())
-                    .ticker(company.getTicker())
-                    .build()
+                            .name(company.getName())
+                            .ticker(company.getTicker())
+                            .build()
             );
 
             // 스크래핑한 배당금 정보 중 데이터베이스에 없는 값은 저장

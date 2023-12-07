@@ -3,6 +3,7 @@ package com.springboot.dividendmanagement.service;
 import com.springboot.dividendmanagement.model.Company;
 import com.springboot.dividendmanagement.model.Dividend;
 import com.springboot.dividendmanagement.model.ScrapedResult;
+import com.springboot.dividendmanagement.model.constants.CacheKey;
 import com.springboot.dividendmanagement.persist.CompanyRepository;
 import com.springboot.dividendmanagement.persist.DividendRepository;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
@@ -22,9 +23,9 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
-    @Cacheable(key="#companyName", value = "finance")
+    @Cacheable(key = "#companyName", value = CacheKey.KEY_FINANCE)
     public ScrapedResult getDividendByCompanyName(String companyName) {
-        log.info("search company -> "+companyName);
+        log.info("search company -> " + companyName);
         //1. 회사명을 기준으로 회사정보 조회
         CompanyEntity companyEntity = companyRepository.findByName(companyName)
                 .orElseThrow(() -> new RuntimeException("존재하지않는 회사명입니다."));
