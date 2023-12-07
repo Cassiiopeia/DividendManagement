@@ -1,7 +1,19 @@
+### post company 3M
+POST http://localhost:8080/company
+Content-Type: application/json
+
+{
+  "ticker": "MMM"
+}
+
 ### post company
 POST http://localhost:8080/company
 Content-Type: application/json
 
 {
-  "ticker": "mmm"
+  "ticker": "O"
 }
+
+### get dividend from company
+GET http://localhost:8080/finance/dividend/3M Company
+Accept: application/json
