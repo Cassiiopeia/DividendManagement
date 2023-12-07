@@ -3,10 +3,7 @@ package com.springboot.dividendmanagement.persist.entity;
 import com.springboot.dividendmanagement.model.Dividend;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "DIVIDENED")
@@ -14,6 +11,13 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint( // UniqueKey 설정 : 중복 데이터 저장 방지
+                        columnNames = {"companyId", "date"}
+                )
+        }
+)
 public class DividendEntity {
 
     @Id
@@ -28,7 +32,7 @@ public class DividendEntity {
 
 
     public DividendEntity(Long companyId, Dividend dividend) {
-        this.companyId =  companyId;
+        this.companyId = companyId;
         this.date = dividend.getDate();
         this.dividend = dividend.getDividend();
     }

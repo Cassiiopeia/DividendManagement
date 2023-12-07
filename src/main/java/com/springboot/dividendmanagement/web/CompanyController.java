@@ -20,7 +20,7 @@ public class CompanyController {
     //  배당금 조회 자성완성
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
-        var result = companyService.autocomplete(keyword);
+        var result = companyService.getCompanyNamesByKeyword(keyword);
         return ResponseEntity.ok(result);
     }
 
