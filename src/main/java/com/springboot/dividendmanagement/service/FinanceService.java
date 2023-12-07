@@ -8,12 +8,14 @@ import com.springboot.dividendmanagement.persist.DividendRepository;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
 import com.springboot.dividendmanagement.persist.entity.DividendEntity;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class FinanceService {
@@ -22,6 +24,7 @@ public class FinanceService {
 
     @Cacheable(key="#companyName", value = "finance")
     public ScrapedResult getDividendByCompanyName(String companyName) {
+        log.info("search company -> "+companyName);
         //1. 회사명을 기준으로 회사정보 조회
         CompanyEntity companyEntity = companyRepository.findByName(companyName)
                 .orElseThrow(() -> new RuntimeException("존재하지않는 회사명입니다."));
