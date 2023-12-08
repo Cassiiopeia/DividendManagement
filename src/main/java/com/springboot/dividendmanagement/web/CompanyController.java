@@ -1,9 +1,11 @@
 package com.springboot.dividendmanagement.web;
 
 import com.springboot.dividendmanagement.model.Company;
+import com.springboot.dividendmanagement.model.constants.CacheKey;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
 import com.springboot.dividendmanagement.service.CompanyService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/company")
 public class CompanyController {
     private final CompanyService companyService;
+    private final CacheManager redisCacheManager;
 
     //  배당금 조회 자성완성
     @GetMapping("/autocomplete")
@@ -47,8 +50,16 @@ public class CompanyController {
     }
 
     // 회사 삭제
-    @DeleteMapping()
-    public ResponseEntity<?> deleteCompany() {
-        return null;
+    @DeleteMapping("/{ticker}")
+    @PreAuthorize("hasRole('WRITE')")
+    public ResponseEntity<?> deleteCompany(@PathVariable String ticker) {
+        String companyName = companyService.deleteCompany(ticker);
+        clearFinanceCache(companyName);
+        return ResponseEntity.ok(companyName);
     }
+
+    public void clearFinanceCache(String companyName){
+       redisCacheManager.getCache(CacheKey.KEY_FINANCE).evict(companyName);
+    }
+
 }

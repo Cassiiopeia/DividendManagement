@@ -1,6 +1,8 @@
 ### get dividend from company
 GET http://localhost:8080/finance/dividend/3M Company
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzAyMDM5MjM0LCJleHAiOjE3MDIwNDI4MzR9.HiEmZe6kCrBaCGEi6a1bk30HneBtyFTctuX2_fyXWDvubAS3SUeR8HaazlROrMmJf3KPpcXARV0qrWnkKiPgog
+
 
 ### get trie autocomplete
 GET http://localhost:8080/company/autocomplete?keyword
@@ -9,3 +11,9 @@ Accept: application/json
 ### get trie autocomplete
 GET http://localhost:8080/company/autocomplete?keyword=I
 Accept: application/json
+
+
+### delete company
+DELETE http://localhost:8080/company/MMM
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzAyMDM5MjM0LCJleHAiOjE3MDIwNDI4MzR9.HiEmZe6kCrBaCGEi6a1bk30HneBtyFTctuX2_fyXWDvubAS3SUeR8HaazlROrMmJf3KPpcXARV0qrWnkKiPgog

@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "username": "grace",
   "password": "grace123!@#",
-  "roles": ["ROLE_READ"]
+  "roles": ["ROLE_READ","ROLE_WRITE"]
 }
 
 
