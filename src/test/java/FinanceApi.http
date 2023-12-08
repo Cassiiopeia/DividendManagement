@@ -1,0 +1,11 @@
+### get dividend from company
+GET http://localhost:8080/finance/dividend/3M Company
+Accept: application/json
+
+### get trie autocomplete
+GET http://localhost:8080/company/autocomplete?keyword
+Accept: application/json
+
+### get trie autocomplete
+GET http://localhost:8080/company/autocomplete?keyword=I
+Accept: application/json

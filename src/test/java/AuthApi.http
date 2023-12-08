@@ -1,0 +1,19 @@
+### post auth/signup
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "grace",
+  "password": "grace123!@#",
+  "roles": ["ROLE_READ"]
+}
+
+
+### post auth/signin
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "username": "grace",
+  "password": "grace123!@#"
+}

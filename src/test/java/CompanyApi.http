@@ -1,5 +1,7 @@
-### post company 3M
+## post company 3M
 POST http://localhost:8080/company
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCJdLCJpYXQiOjE3MDIwMjcyODAsImV4cCI6MTcwMjAzMDg4MH0.sakUpWuvFzlEEZ17NifqJaRS_BenORg-7H8c7SYn4z0iJbnXsW3ELxlswHfKzqS0zdbh_49U1nlbWq_n0DbQaA
+
 Content-Type: application/json
 
 {
@@ -38,14 +40,7 @@ Content-Type: application/json
   "ticker": "SPY"
 }
 
-### get dividend from company
-GET http://localhost:8080/finance/dividend/3M Company
-Accept: application/json
+### 전체 회사 조회
+GET http://localhost:8080/company?size=5&page=1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCJdLCJpYXQiOjE3MDIwMjcyODAsImV4cCI6MTcwMjAzMDg4MH0.sakUpWuvFzlEEZ17NifqJaRS_BenORg-7H8c7SYn4z0iJbnXsW3ELxlswHfKzqS0zdbh_49U1nlbWq_n0DbQaA
 
-### get trie autocomplete
-GET http://localhost:8080/company/autocomplete?keyword
-Accept: application/json
-
-### get trie autocomplete
-GET http://localhost:8080/company/autocomplete?keyword=I
-Accept: application/json
