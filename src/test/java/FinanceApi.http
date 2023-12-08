@@ -1,7 +1,13 @@
 ### get dividend from company
 GET http://localhost:8080/finance/dividend/3M Company
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzAyMDM5MjM0LCJleHAiOjE3MDIwNDI4MzR9.HiEmZe6kCrBaCGEi6a1bk30HneBtyFTctuX2_fyXWDvubAS3SUeR8HaazlROrMmJf3KPpcXARV0qrWnkKiPgog
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzAyMDQ0Mzg5LCJleHAiOjE3MDIwNDc5ODl9.yzCGG6TOoIyskxH72CdH-NC-O9_gwfb5WZbxgCc5_rQdC9Tn1cZmbroY66I3al_YQUXydaZsn8hvbgzIkzUhhQ
+
+### get wrong company info
+GET http://localhost:8080/finance/dividend/3M C
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncmFjZSIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzAyMDQ0Mzg5LCJleHAiOjE3MDIwNDc5ODl9.yzCGG6TOoIyskxH72CdH-NC-O9_gwfb5WZbxgCc5_rQdC9Tn1cZmbroY66I3al_YQUXydaZsn8hvbgzIkzUhhQ
+Accept: application/json
+
 
 
 ### get trie autocomplete

@@ -3,6 +3,7 @@ package com.springboot.dividendmanagement.service;
 import com.springboot.dividendmanagement.model.MemberEntity;
 import com.springboot.dividendmanagement.model.constants.Auth;
 import com.springboot.dividendmanagement.persist.MemberRepository;
+import exception.impl.AlreadyExistUserException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,7 @@ public class MemberService implements UserDetailsService {
     public MemberEntity register(Auth.SignUp member) {
         boolean exists = memberRepository.existsByUsername(member.getUsername());
         if (exists) {
-            throw new RuntimeException("이미 사용중인 아이디입니다.");
+            throw new AlreadyExistUserException();
         }
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         return memberRepository.save(member.toEntity());

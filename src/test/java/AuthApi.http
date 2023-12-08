@@ -1,7 +1,6 @@
 ### post auth/signup
 POST http://localhost:8080/auth/signup
 Content-Type: application/json
-
 {
   "username": "grace",
   "password": "grace123!@#",

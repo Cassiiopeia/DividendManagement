@@ -8,6 +8,7 @@ import com.springboot.dividendmanagement.persist.CompanyRepository;
 import com.springboot.dividendmanagement.persist.DividendRepository;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
 import com.springboot.dividendmanagement.persist.entity.DividendEntity;
+import exception.impl.NoCompanyException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,7 +29,8 @@ public class FinanceService {
         log.info("search company -> " + companyName);
         //1. 회사명을 기준으로 회사정보 조회
         CompanyEntity companyEntity = companyRepository.findByName(companyName)
-                .orElseThrow(() -> new RuntimeException("존재하지않는 회사명입니다."));
+                .orElseThrow(NoCompanyException::new);
+
         //2. 조회된 회사 ID로 해당금 조회
         List<DividendEntity> dividendEntities
                 = dividendRepository.findAllByCompanyId(companyEntity.getId());

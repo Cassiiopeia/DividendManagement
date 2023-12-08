@@ -7,6 +7,7 @@ import com.springboot.dividendmanagement.persist.DividendRepository;
 import com.springboot.dividendmanagement.persist.entity.CompanyEntity;
 import com.springboot.dividendmanagement.persist.entity.DividendEntity;
 import com.springboot.dividendmanagement.scraper.Scraper;
+import exception.impl.NoCompanyException;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.Trie;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,7 +67,7 @@ public class CompanyService {
         Page<CompanyEntity> companyEntities
                 = companyRepository.findByNameStartingWithIgnoreCase(keyword, limit);
         return companyEntities.stream()
-                .map(e -> e.getName())
+                .map(CompanyEntity::getName)
                 .collect(Collectors.toList());
     }
 
@@ -89,7 +89,7 @@ public class CompanyService {
 
     public String deleteCompany(String ticker) {
         CompanyEntity companyEntity = companyRepository.findByTicker(ticker)
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 회사입니다."));
+                .orElseThrow(NoCompanyException::new);
 
         dividendRepository.deleteAllByCompanyId(companyEntity.getId());
         companyRepository.delete(companyEntity);
