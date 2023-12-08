@@ -18,10 +18,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
   redis:
     host: localhost
     port: 6379
+  jwt:
+    secret: c3ByaW5nLWJvb3QtZGl2aWRlbmQtcHJvamVjdC1qd3Qtc2VjcmV0LWtleQo=
 
 server:
   port: 8080
