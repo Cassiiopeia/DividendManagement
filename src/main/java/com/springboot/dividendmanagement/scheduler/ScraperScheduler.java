@@ -53,6 +53,7 @@ public class ScraperScheduler {
                                         e.getCompanyId(), e.getDate());
                         if (!exists) {
                             dividendRepository.save(e);
+                            log.info("insert new divended -> " + e.toString());
                         }
                     });
             // 연속적으로 스크래핑 대상 사이트서버에 요청을 날리지 않도록 일시정지

@@ -22,16 +22,19 @@ public class AuthController {
     private final TokenProvider tokenProvider;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody Auth.SignUp request){
+    public ResponseEntity<?> signup(@RequestBody Auth.SignUp request) {
         // 회원가입을 위한 API
         MemberEntity memberEntity = memberService.register(request);
+        log.info("user signup -> " + memberEntity.getUsername());
         return ResponseEntity.ok(memberEntity);
     }
+
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody Auth.SignIn request){
+    public ResponseEntity<?> signin(@RequestBody Auth.SignIn request) {
         // 로그인용 API
         MemberEntity memberEntity = memberService.authenticate(request);
         String token = tokenProvider.generateToken(memberEntity.getUsername(), memberEntity.getRoles());
+        log.info("user login -> " + request.getUsername());
         return ResponseEntity.ok(token);
     }
 }

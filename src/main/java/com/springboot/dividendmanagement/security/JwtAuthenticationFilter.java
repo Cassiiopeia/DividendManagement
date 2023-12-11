@@ -25,18 +25,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final TokenProvider tokenProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
         String token = resolveTokenFromRequest(request);
-        if(StringUtils.hasText(token) && tokenProvider.validateToken(token)){
+        if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
             Authentication auth = tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
+
+            log.info(String.format("[%s] -> [%s]",
+                    tokenProvider.getUsername(token),
+                    request.getRequestURI()));
         }
         filterChain.doFilter(request, response);
     }
 
-    private String resolveTokenFromRequest( HttpServletRequest request){
+    private String resolveTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader(TOKEN_HEADER);
-        if( !ObjectUtils.isEmpty(token) && token.startsWith(TOKEN_PREFIX)){
+        if (!ObjectUtils.isEmpty(token) && token.startsWith(TOKEN_PREFIX)) {
             return token.substring(TOKEN_PREFIX.length());
         }
         return null;
